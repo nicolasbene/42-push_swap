@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 18:35:57 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/01/25 17:40:36 by nibenoit         ###   ########.fr       */
+/*   Created: 2022/11/11 18:56:51 by nibenoit          #+#    #+#             */
+/*   Updated: 2023/01/25 17:46:13 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <limits.h>
-# include "libft.h"
+void	ft_lstclear(t_list **lst, void (*del)(int))
+{
+	t_list	*current;
+	t_list	*next;
 
-# define MAX_LEN	11
-
-int	parse(t_list **a, int argc, char *argv[]);
-
-# endif
+	current = *lst;
+	while (current)
+	{
+		next = current->next;
+		(*del)(current->content);
+		free(current);
+		current = next;
+	}
+	*lst = NULL;
+}

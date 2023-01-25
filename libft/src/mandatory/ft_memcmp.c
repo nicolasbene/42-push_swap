@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 18:35:57 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/01/25 17:40:36 by nibenoit         ###   ########.fr       */
+/*   Created: 2022/11/09 14:09:07 by nibenoit          #+#    #+#             */
+/*   Updated: 2022/11/09 16:25:21 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <limits.h>
-# include "libft.h"
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	unsigned char	*m1;
+	unsigned char	*m2;
+	size_t			i;
 
-# define MAX_LEN	11
-
-int	parse(t_list **a, int argc, char *argv[]);
-
-# endif
+	i = 0;
+	m1 = (unsigned char *)s1;
+	m2 = (unsigned char *)s2;
+	while (i < n)
+	{
+		if (m1[i] != m2[i])
+			return (m1[i] - m2[i]);
+		i++;
+	}
+	return (0);
+}

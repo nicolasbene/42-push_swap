@@ -1,34 +1,41 @@
-NAME	=	push_swap
+SRCDIR	= src/
+OBJDIR	= bin/
+INCDIR	= include/
+FTPATH	= libft/
+FTINC	= $(FTPATH)include/
+LIBFT	= $(FTPATH)libft.a
+######################################################################
+SRCS	= main.c\
+			parse.c\
+			error.c
 
-CC		=	gcc
+OBJS	= $(addprefix $(OBJDIR),$(SRCS:.c=.o))
+#####################################################################
+CC		= gcc
+CFLAGS	= -Wall -Wextra -Werror -g
+LINK	= -lft
+INCPATH	= -I$(INCDIR) -I$(FTINC)
+LIBPATH	= -L$(FTPATH)
+NAME	= push_swap
+######################################################################
+all: $(NAME)
 
-FLAG	=	-Wall -Wextra -Werror -g3
+$(NAME): $(LIBFT) $(OBJS)
+	$(CC) $(OBJS) $(LIBPATH) $(LINK) -o $(NAME)
 
-SRC		=	main.c\
-			errors.c\
-			exit.c
+$(OBJDIR)%.o: $(SRCDIR)%.c
+	$(CC) -c $(CFLAGS) $(INCPATH) $< -o $@
 
-OBJ		= $(addprefix ./obj/,$(SRC:.c=.o))
-
-all:	obj $(NAME)
-
-obj:
-	mkdir -p ./obj/
-
-./obj/%.o:./src/%.c
-	@$(CC) $(FLAGS) -Iinclude/ -o $@ -c $<
-
-$(NAME):	$(OBJ)
-	@$(CC) $(FLAG) $(OBJ) -o $(NAME)
+$(LIBFT):
+	make -C $(FTPATH)
 
 clean:
-	@rm -rf $(OBJ)
-	@echo "OBJ deleted"
+	rm -rf $(OBJS)
 
-fclean:	clean
-	@rm -rf $(NAME)
-	@echo "$(NAME) deleted"
+fclean: clean
+	make fclean -C $(FTPATH)
+	rm -f $(NAME)
 
-re:	fclean all
+re: fclean $(NAME)
 
-.PHONY:	all, clean, fclean, re
+.PHONY: all libft clean fclean re

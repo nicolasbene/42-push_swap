@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 16:43:30 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/01/24 18:56:55 by nibenoit         ###   ########.fr       */
+/*   Created: 2022/11/08 16:13:32 by nibenoit          #+#    #+#             */
+/*   Updated: 2022/11/12 17:18:34 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-
-
-void	ft_exit(int *stacka)
+void	*ft_memcpy(void *dest, const void *src, size_t size)
 {
-	if (stacka)
+	size_t	i;
+	char	*desti;
+	char	*source;
+
+	if (dest == NULL && src == NULL)
+		return (NULL);
+	desti = (char *)dest;
+	source = (char *)src;
+	i = 0;
+	while (i < size)
 	{
-		ft_free(stacka);
+		desti[i] = source[i];
+		i++;
 	}
-	write (2, "Error\n", 6);
-	exit(-1);
+	return (dest);
 }

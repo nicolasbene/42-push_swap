@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 18:35:57 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/01/25 17:40:36 by nibenoit         ###   ########.fr       */
+/*   Created: 2022/11/09 17:58:55 by nibenoit          #+#    #+#             */
+/*   Updated: 2022/11/09 18:16:19 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <limits.h>
-# include "libft.h"
+char	*ft_strdup(const char *src)
+{
+	char	*ret;
+	size_t	len;
 
-# define MAX_LEN	11
-
-int	parse(t_list **a, int argc, char *argv[]);
-
-# endif
+	len = ft_strlen(src);
+	ret = (char *)malloc(sizeof(*ret) * (len + 1));
+	if (ret)
+	{
+		ft_strlcpy(ret, src, len + 1);
+		return (ret);
+	}
+	else
+		return (0);
+}

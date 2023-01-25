@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 18:35:57 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/01/25 17:40:36 by nibenoit         ###   ########.fr       */
+/*   Created: 2022/11/08 16:41:42 by nibenoit          #+#    #+#             */
+/*   Updated: 2022/11/08 18:15:22 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <limits.h>
-# include "libft.h"
+void	*ft_memmove(void *dest, const void *src, size_t size)
+{
+	size_t	i;
+	char	*desti;
+	char	*source;
 
-# define MAX_LEN	11
-
-int	parse(t_list **a, int argc, char *argv[]);
-
-# endif
+	desti = (char *)dest;
+	source = (char *)src;
+	i = 0;
+	if (dest == NULL && src == NULL)
+		return (NULL);
+	if (src < dest)
+	{
+		while (size-- > 0)
+			desti[size] = source[size];
+		return (dest);
+	}
+	while (i < size)
+	{
+		desti[i] = source[i];
+		i++;
+	}
+	return (dest);
+}

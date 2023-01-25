@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 18:35:57 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/01/25 17:40:36 by nibenoit         ###   ########.fr       */
+/*   Created: 2022/11/10 18:42:16 by nibenoit          #+#    #+#             */
+/*   Updated: 2022/11/10 19:15:46 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <limits.h>
-# include "libft.h"
-
-# define MAX_LEN	11
-
-int	parse(t_list **a, int argc, char *argv[]);
-
-# endif
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (s)
+		write(fd, s, ft_strlen(s));
+}

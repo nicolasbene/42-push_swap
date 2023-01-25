@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 18:35:57 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/01/25 17:40:36 by nibenoit         ###   ########.fr       */
+/*   Created: 2022/11/08 19:15:26 by nibenoit          #+#    #+#             */
+/*   Updated: 2022/11/08 20:16:34 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <limits.h>
-# include "libft.h"
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
+{
+	size_t	a;
+	size_t	lendst;
 
-# define MAX_LEN	11
-
-int	parse(t_list **a, int argc, char *argv[]);
-
-# endif
+	if (size == 0 || size <= ft_strlen(dest))
+		return (ft_strlen(src) + size);
+	a = 0;
+	lendst = ft_strlen(dest);
+	while (src[a] && (a + lendst) < (size - 1))
+	{
+		dest[a + lendst] = src[a];
+		a++;
+	}
+	dest[a + lendst] = '\0';
+	return (lendst + ft_strlen(src));
+}
