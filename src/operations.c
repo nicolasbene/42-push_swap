@@ -6,7 +6,7 @@
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:52:13 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/01/31 19:26:04 by nibenoit         ###   ########.fr       */
+/*   Updated: 2023/02/01 11:28:13 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ void	swap(t_list *s1, t_list *s2, char *msg)
 	}
 	if (s2)
 		swap(s2, NULL, msg);
-	if (msg && !s2)
+	if (!s2 && msg)
 		ft_printf("%s\n", msg);
 }
 
 void	push(t_list **from, t_list **to, char *msg)
 {
 	t_list	*tmp;
+	
 	tmp = (*from)->next;
 	ft_lstadd_front(to, *from);
 	*from = tmp;
@@ -41,16 +42,42 @@ void	push(t_list **from, t_list **to, char *msg)
 void	rotate(t_list **s1, t_list **s2, char *msg)
 {
 	t_list	*last;
+	t_list	*first;
 
 	if (s1 && *s1 && (*s1)->next)
 	{
-		last = ft_lstlast(*s1);
-		last->next = *s1;
-		*s1 = (*s1)->next;
-		last->next->next = NULL;
+		first = *s1;
+		*s1 = first->next;
+		last = ft_lstlast(first);
+		last->next = first;
+		first->next = NULL;
 	}
 	if (s2)
 		rotate(s2, NULL, msg);
+	if (!s2 && msg)
+		ft_printf("%s\n", msg);
+}
+
+void	rev_rotate(t_list **s1, t_list **s2, char *msg)
+{
+	t_list	*prev;
+	t_list	*curr;
+
+    if (s1 && *s1 && (*s1)->next)
+    {
+        prev = *s1;
+		curr = (*s1)->next;
+		while (curr->next)
+		{
+			prev = curr;
+			curr = curr->next;
+		}
+		curr->next = *s1;
+		prev->next = NULL;
+		*s1 = curr;
+    }
+	if (s2)
+		rev_rotate(s2, NULL, msg);
 	if (!s2 && msg)
 		ft_printf("%s\n", msg);
 }

@@ -6,7 +6,7 @@
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:20:30 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/01/31 19:24:48 by nibenoit         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:31:53 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,37 +41,8 @@ int	main(int argc, char *argv[])
 	print_st(a, b);
 	if (len == 2 && a->content > a->next->content)
 		swap(a, NULL, "sa");
-	// else if (len >= 3 && len <= 5)
-	// 	sort_five(a, b);
-	print_st(a, b);
-
-	push(&a, &b, "pb");
-	print_st(a, b);
-	push(&a, &b, "pb");
-	print_st(a, b);
-	push(&a, &b, "pb");
-	print_st(a, b);
-	push(&a, &b, "pb");
-	print_st(a, b);
-
-	swap(b, NULL, "sb");
-	print_st(a, b);
-
-	swap(a, b, "ss");
-	print_st(a, b);
-
-
-
-	swap(a, NULL, "sa");
-	print_st(a, b);
-
-	rotate(&a, NULL, "ra");
-	print_st(a, b);
-
-	rotate(&b, NULL, "rb");
-	print_st(a, b);
-
-	rotate(&a, &b, "rr");
+	else if (len >= 3 && len <= 5)
+		sort_five(&a, &b, len);
 	print_st(a, b);
 
  	ft_lstclear(&a, NULL);

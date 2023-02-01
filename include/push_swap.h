@@ -6,7 +6,7 @@
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:35:57 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/01/31 19:21:34 by nibenoit         ###   ########.fr       */
+/*   Updated: 2023/02/01 12:40:46 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@
 void		swap(t_list *s1, t_list *s2, char *msg);
 void		push(t_list **from, t_list **to, char *msg);
 void		rotate(t_list **s1, t_list **s2, char *msg);
+void		rev_rotate(t_list **s1, t_list **s2, char *msg);
 
 
 int			parse(t_list **a, int argc, char *argv[]);
 void		error_msg(char *msg, t_list *a, t_list *b);
-// void		put_buff(int op);
-// static void	print_op(int a);
+void		sort_five(t_list **a, t_list **b, size_t len);
 
 #endif

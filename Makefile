@@ -8,6 +8,7 @@ LIBFT	= $(FTPATH)libft.a
 SRCS	= main.c\
 			parse.c\
 			operations.c\
+			sort_five.c\
 			error.c
 
 OBJS	= $(addprefix $(OBJDIR),$(SRCS:.c=.o))
