@@ -6,7 +6,7 @@
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 12:07:12 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/02/01 18:03:23 by nibenoit         ###   ########.fr       */
+/*   Updated: 2023/02/02 14:28:53 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,12 @@ void	sort_five(t_list **a, t_list **b, size_t len)
 		swap((*a), NULL, "sa");
 	if (len > 3)
 	{
-		move_stack_a(a, get_greater_value(*a, (*b)->content));
+		move_nb_top_a(a, get_next_greater_value(*a, (*b)->content));
 		push(b, a, "pa");
+		if (len > 4)
+		{
+			move_nb_top_a(a, get_next_greater_value(*a, (*b)->content));
+			push(b, a, "pa");
+		}
 	}
 }

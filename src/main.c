@@ -6,7 +6,7 @@
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:20:30 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/02/01 14:31:53 by nibenoit         ###   ########.fr       */
+/*   Updated: 2023/02/03 18:37:33 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ int	main(int argc, char *argv[])
 		swap(a, NULL, "sa");
 	else if (len >= 3 && len <= 5)
 		sort_five(&a, &b, len);
+	else if (len > 5 && len <= 100)
+		sort_small(&a, &b);
+	move_nb_top_a(&a, find_min_value(a));
 	print_st(a, b);
-
  	ft_lstclear(&a, NULL);
 	ft_lstclear(&b, NULL);
 	return (0);
