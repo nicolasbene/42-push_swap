@@ -6,7 +6,7 @@
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:52:13 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/02/01 11:28:13 by nibenoit         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:17:57 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	swap(t_list *s1, t_list *s2, char *msg)
 void	push(t_list **from, t_list **to, char *msg)
 {
 	t_list	*tmp;
-	
+
 	tmp = (*from)->next;
 	ft_lstadd_front(to, *from);
 	*from = tmp;
@@ -63,9 +63,9 @@ void	rev_rotate(t_list **s1, t_list **s2, char *msg)
 	t_list	*prev;
 	t_list	*curr;
 
-    if (s1 && *s1 && (*s1)->next)
-    {
-        prev = *s1;
+	if (s1 && *s1 && (*s1)->next)
+	{
+		prev = *s1;
 		curr = (*s1)->next;
 		while (curr->next)
 		{
@@ -75,7 +75,7 @@ void	rev_rotate(t_list **s1, t_list **s2, char *msg)
 		curr->next = *s1;
 		prev->next = NULL;
 		*s1 = curr;
-    }
+	}
 	if (s2)
 		rev_rotate(s2, NULL, msg);
 	if (!s2 && msg)

@@ -11,6 +11,8 @@ SRCS	= main.c\
 			adv_operations.c\
 			sort_five.c\
 			sort_more.c\
+			insert_fastest.c\
+			median.c\
 			error.c
 
 OBJS	= $(addprefix $(OBJDIR),$(SRCS:.c=.o))

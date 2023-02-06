@@ -6,7 +6,7 @@
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:12:32 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/02/02 15:10:55 by nibenoit         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:14:34 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,10 @@ int	get_next_greater_value(t_list *s, int n)
 
 	min = find_min_value(s);
 	max = find_max_value(s);
-
 	if (n > max || n < min)
 		return (min);
 	next_greater = max;
-	while(s)
+	while (s)
 	{
 		if (s->content > n && s->content < next_greater)
 			next_greater = s->content;

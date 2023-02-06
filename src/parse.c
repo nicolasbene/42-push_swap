@@ -6,7 +6,7 @@
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 15:55:41 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/01/25 18:02:18 by nibenoit         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:15:39 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	check_double(int argc, char *argv[])
 int	parse(t_list **a, int argc, char *argv[])
 {
 	t_list	*elem;
-	
+
 	argc--;
 	while (argc > 0)
 	{
