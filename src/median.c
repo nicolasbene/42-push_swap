@@ -6,7 +6,7 @@
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 18:01:17 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/02/06 18:56:22 by nibenoit         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:23:31 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	push_median_b(int min, int max, t_list **a, t_list **b)
 	while (first)
 	{
 		tmp = *a;
-		first = tmp;
+		first = NULL;
 		while (tmp)
 		{
 			if (tmp->content >= min && tmp->content <= max)
