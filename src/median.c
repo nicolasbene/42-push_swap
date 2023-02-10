@@ -6,7 +6,7 @@
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 18:01:17 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/02/07 14:23:31 by nibenoit         ###   ########.fr       */
+/*   Updated: 2023/02/07 17:49:48 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_abs(int n)
 int	def_median(t_list *a, int len)
 {
 	int	next_greater;
-	int med;
+	int	med;
 
 	med = len / 2;
 	next_greater = find_min_value(a);

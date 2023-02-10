@@ -6,7 +6,7 @@
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:35:57 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/02/07 12:12:39 by nibenoit         ###   ########.fr       */
+/*   Updated: 2023/02/10 10:45:42 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 # include <unistd.h>
 # include <limits.h>
 # include "libft.h"
-
-# define SWAP_BUFF_SIZE 30	
 
 # define MAX_LEN	11
 
@@ -43,6 +41,7 @@ void	move_nb_top_a(t_list **a, int ng);
 int		get_next_greater_value(t_list *s, int n);
 
 int		parse(t_list **a, int argc, char *argv[]);
+int		already_sort(t_list *s);
 void	sort_five(t_list **a, t_list **b, size_t len);
 void	sort_small(t_list **a, t_list **b);
 void	sort_big(t_list **a, t_list **b);

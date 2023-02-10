@@ -6,7 +6,7 @@
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 12:07:12 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/02/06 15:15:48 by nibenoit         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:39:02 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,5 @@ void	sort_five(t_list **a, t_list **b, size_t len)
 			push(b, a, "pa");
 		}
 	}
+	move_nb_top_a(a, find_min_value(*a));
 }

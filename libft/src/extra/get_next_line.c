@@ -6,77 +6,94 @@
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:47:47 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/01/25 12:28:38 by nibenoit         ###   ########.fr       */
+/*   Updated: 2023/02/10 11:52:15 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static void	gnl_read(int fd, char *buf, char **str)
+static void	copy_until_end(char *src, char *dst)
 {
-	int		i;
-	char	*tmp;
+	int	i;
 
-	if (!*str || !ft_strchr(*str, '\n'))
+	i = 0;
+	while (src[i])
 	{
-		i = read(fd, buf, BUFFER_SIZE);
-		while (i > 0)
-		{
-			buf[i] = 0;
-			if (!*str)
-				*str = ft_substr(buf, 0, i);
-			else
-			{
-				tmp = *str;
-				*str = ft_strjoin(*str, buf);
-				free(tmp);
-			}
-			if (ft_strchr(buf, '\n'))
-				break ;
-			i = read(fd, buf, BUFFER_SIZE);
-		}
+		dst[i] = src[i];
+		i++;
 	}
-	free(buf);
+	dst[i] = 0;
 }
 
-static char	*gnl_process(char **str)
+static void	*free_strings(char *s1, char *s2)
 {
-	int		i;
-	int		j;
-	char	*ret;
-	char	*tmp;
+	if (s1)
+		free(s1);
+	if (s2)
+		free(s2);
+	return (NULL);
+}
 
-	if (!*str)
-		return (0);
-	if (!ft_strchr(*str, '\n'))
+static char	*extract_line_and_save(char **line, char *save, int size)
+{
+	char	*tmp_save;
+
+	if (size < 0)
+		size = ft_strlen(save);
+	if (size == 0)
+		return (free_strings(save, NULL));
+	tmp_save = malloc(ft_strlen(save + size) + 1);
+	if (!tmp_save)
+		return (free_strings(save, NULL));
+	copy_until_end(save + size, tmp_save);
+	*line = malloc(size + 1);
+	if (*line != NULL)
 	{
-		ret = ft_substr(*str, 0, ft_strlen(*str));
-		free(*str);
-		*str = 0;
-		return (ret);
+		save[size] = 0;
+		copy_until_end(save, *line);
 	}
-	i = ft_strlen(*str);
-	j = ft_strlen(ft_strchr(*str, '\n'));
-	ret = ft_substr(*str, 0, i - j + 1);
-	tmp = *str;
-	*str = ft_substr(ft_strchr(*str, '\n'), 1, j - 1);
-	free(tmp);
-	return (ret);
+	free(save);
+	return (tmp_save);
+}
+
+static char	*read_line(int fd, char **line, char *save)
+{
+	int		ret;
+	char	*tmp;
+	char	*buff;
+
+	ret = BUFFER_SIZE;
+	buff = malloc(BUFFER_SIZE + 1);
+	if (!buff)
+		return (NULL);
+	tmp = ft_strchr(save, '\n');
+	while (tmp == NULL && ret == BUFFER_SIZE)
+	{
+		ret = read(fd, buff, BUFFER_SIZE);
+		if (ret == -1)
+			return (free_strings(save, buff));
+		buff[ret] = 0;
+		tmp = ft_strjoin(save, buff);
+		free(save);
+		save = tmp;
+		tmp = ft_strchr(save, '\n');
+	}
+	if (ret != BUFFER_SIZE && tmp == NULL)
+		tmp = save + ft_strlen(save) - 1;
+	free(buff);
+	return (extract_line_and_save(line, save, (tmp - save) + 1));
 }
 
 char	*get_next_line(int fd)
 {
-	char		*buf;
-	static char	*str;
+	char		*line;
+	static char	*save[OPEN_MAX] = {0};
 
-	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buf)
-		return (0);
-	if (BUFFER_SIZE < 1 || fd == -1 || read(fd, buf, 0) == -1)
-	{
-		free(buf);
-		return (0);
-	}
-	gnl_read(fd, buf, &str);
-	return (gnl_process(&str));
+	if (fd < 0 || BUFFER_SIZE < 1)
+		return (NULL);
+	line = NULL;
+	if (!save[fd])
+		save[fd] = ft_strdup("");
+	save[fd] = read_line(fd, &line, save[fd]);
+	return (line);
 }

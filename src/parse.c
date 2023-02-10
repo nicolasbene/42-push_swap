@@ -6,7 +6,7 @@
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 15:55:41 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/02/06 15:15:39 by nibenoit         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:03:48 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,15 @@ int	parse(t_list **a, int argc, char *argv[])
 		argc--;
 	}
 	return (0);
+}
+
+int	already_sort(t_list *s)
+{
+	while (s->next)
+	{
+		if (s->content > s->next->content)
+			return (0);
+		s = s->next;
+	}
+	return (-1);
 }

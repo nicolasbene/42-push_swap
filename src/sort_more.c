@@ -6,7 +6,7 @@
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:21:21 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/02/07 16:01:55 by nibenoit         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:37:03 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	sort_big(t_list **a, t_list **b)
 	}
 	while ((*b))
 		insert_fastest_a(a, b);
+	move_nb_top_a(a, find_min_value(*a));
 }
 
 void	sort_small(t_list **a, t_list **b)
@@ -31,4 +32,5 @@ void	sort_small(t_list **a, t_list **b)
 		push(a, b, "pb");
 	while ((*b))
 		insert_fastest_a(a, b);
+	move_nb_top_a(a, find_min_value(*a));
 }

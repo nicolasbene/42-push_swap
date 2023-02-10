@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations.c                                       :+:      :+:    :+:   */
+/*   operations_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/31 15:52:13 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/02/10 10:45:27 by nibenoit         ###   ########.fr       */
+/*   Created: 2023/02/10 09:41:36 by nibenoit          #+#    #+#             */
+/*   Updated: 2023/02/10 12:26:27 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	swap(t_list *s1, t_list *s2, char *msg)
 	if (s2)
 		swap(s2, NULL, msg);
 	if (!s2 && msg)
-		ft_printf("%s\n", msg);
+		return ;
 }
 
 void	push(t_list **from, t_list **to, char *msg)
@@ -36,7 +36,7 @@ void	push(t_list **from, t_list **to, char *msg)
 	ft_lstadd_front(to, *from);
 	*from = tmp;
 	if (msg)
-		ft_printf("%s\n", msg);
+		return ;
 }
 
 void	rotate(t_list **s1, t_list **s2, char *msg)
@@ -55,7 +55,7 @@ void	rotate(t_list **s1, t_list **s2, char *msg)
 	if (s2)
 		rotate(s2, NULL, msg);
 	if (!s2 && msg)
-		ft_printf("%s\n", msg);
+		return ;
 }
 
 void	rev_rotate(t_list **s1, t_list **s2, char *msg)
@@ -79,5 +79,5 @@ void	rev_rotate(t_list **s1, t_list **s2, char *msg)
 	if (s2)
 		rev_rotate(s2, NULL, msg);
 	if (!s2 && msg)
-		ft_printf("%s\n", msg);
+		return ;
 }
