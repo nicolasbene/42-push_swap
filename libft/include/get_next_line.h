@@ -6,7 +6,7 @@
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:50:57 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/02/10 11:47:19 by nibenoit         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:51:11 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,15 @@
 #  define OPEN_MAX 1024
 # endif
 
-char	*get_next_line(int fd);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlcpy(char *dest, const char *src, size_t size);
-size_t	ft_strlen(const char *str);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(const char *src);
+char		*get_next_line(int fd);
+char		*ft_getres(char *res, char *buff);
+char		*ft_read_file(int fd, char *buff);
+char		*ft_strjfree(char *buff, char *buff2);
+char		*ft_strjoin_g(char *buff, char *buff2);
+size_t		ft_strlen_g(char *str);
+char		*ft_nextline(char *buff, char *res);
+char		*ft_getline(char *buff);
+int			ft_strchr_g(char *str, char c);
+int			has_newline(char *s);
 
 #endif

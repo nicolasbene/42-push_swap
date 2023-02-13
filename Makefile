@@ -1,28 +1,27 @@
-SRCDIR	= src/
-OBJDIR	= bin/
-INCDIR	= include/
-FTPATH	= libft/
-FTINC	= $(FTPATH)include/
-LIBFT	= $(FTPATH)libft.a
+SRCDIR = src/
+OBJDIR = bin/
+INCDIR = include/
+FTPATH = libft/
+FTINC = $(FTPATH)include/
+LIBFT = $(FTPATH)libft.a
 ######################################################################
-SRCS	= main.c\
-			parse.c\
-			operations.c\
-			adv_operations.c\
-			sort_five.c\
-			sort_more.c\
-			insert_fastest.c\
-			median.c\
-			error.c
-
-OBJS	= $(addprefix $(OBJDIR),$(SRCS:.c=.o))
+SRCS = main.c\
+		parse.c\
+		error.c\
+		sort_five.c\
+		adv_operations.c\
+		operations.c\
+		sort_more.c\
+		insert_fastest.c\
+		median.c
+OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 #####################################################################
-CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g
-LINK	= -lft
-INCPATH	= -I$(INCDIR) -I$(FTINC)
-LIBPATH	= -L$(FTPATH)
-NAME	= push_swap
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -g
+LINK = -lft
+INCPATH = -I$(INCDIR) -I$(FTINC)
+LIBPATH = -L$(FTPATH)
+NAME = push_swap
 ######################################################################
 all: $(NAME)
 
@@ -35,12 +34,17 @@ $(OBJDIR)%.o: $(SRCDIR)%.c
 $(LIBFT):
 	make -C $(FTPATH)
 
+checker:
+	make -C checker-dir/
+	cp checker-dir/checker .
+
 clean:
 	rm -rf $(OBJS)
 
 fclean: clean
 	make fclean -C $(FTPATH)
 	rm -f $(NAME)
+	rm -f checker
 
 re: fclean $(NAME)
 

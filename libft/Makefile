@@ -8,6 +8,7 @@ EXTDIR = extra/
 INCDIR = include/
 ######################################################################
 EXTFILES = get_next_line.c\
+			get_next_line_utils.c\
 			ft_printf/ft_printf.c\
 			ft_printf/write_buf.c\
 			ft_printf/print_str.c\

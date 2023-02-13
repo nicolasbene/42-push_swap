@@ -5,15 +5,15 @@ FTPATH = ../libft/
 FTINC = $(FTPATH)include/
 LIBFT = $(FTPATH)libft.a
 ######################################################################
-SRCS = checker/main.c\
+SRCS = checker/main_checker.c\
+		checker/operations_bonus.c\
 		parse.c\
 		error.c\
-		adv_operations.c\
-		checker/operations_bonus.c
+		adv_operations.c
 OBJS = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
 #####################################################################
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 LINK = -lft 
 INCPATH = -I$(INCDIR) -I$(FTINC)
 LIBPATH = -L$(FTPATH) 

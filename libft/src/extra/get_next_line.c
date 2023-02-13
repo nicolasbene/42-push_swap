@@ -6,94 +6,118 @@
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:47:47 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/02/10 11:52:15 by nibenoit         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:49:10 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static void	copy_until_end(char *src, char *dst)
+char	*ft_strjfree(char *buff, char *buff2)
 {
-	int	i;
+	char	*new;
+
+	new = ft_strjoin_g(buff, buff2);
+	free(buff);
+	return (new);
+}
+
+char	*ft_nextline(char *buff, char *res)
+{
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	while (src[i])
+	while (buff[i] && buff[i] != '\n')
+		i++;
+	if (buff[i] == '\n')
+		i++;
+	j = 0;
+	while (buff[i])
 	{
-		dst[i] = src[i];
+		res[j] = buff[i];
+		i++;
+		j++;
+	}
+	res[j] = '\0';
+	free(buff);
+	if (res[0] == '\0')
+		return (NULL);
+	return (res);
+}
+
+char	*ft_getline(char *buff)
+{
+	char	*new;
+	size_t	ltrlen;
+	size_t	i;
+
+	ltrlen = 0;
+	while (buff[ltrlen] && buff[ltrlen] != '\n')
+		ltrlen++;
+	if (buff[ltrlen] == '\n')
+		ltrlen++;
+	new = malloc((ltrlen + 1) * sizeof(char));
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (buff[i] && buff[i] != '\n')
+	{
+		new[i] = buff[i];
 		i++;
 	}
-	dst[i] = 0;
-}
-
-static void	*free_strings(char *s1, char *s2)
-{
-	if (s1)
-		free(s1);
-	if (s2)
-		free(s2);
-	return (NULL);
-}
-
-static char	*extract_line_and_save(char **line, char *save, int size)
-{
-	char	*tmp_save;
-
-	if (size < 0)
-		size = ft_strlen(save);
-	if (size == 0)
-		return (free_strings(save, NULL));
-	tmp_save = malloc(ft_strlen(save + size) + 1);
-	if (!tmp_save)
-		return (free_strings(save, NULL));
-	copy_until_end(save + size, tmp_save);
-	*line = malloc(size + 1);
-	if (*line != NULL)
+	if (buff[i] == '\n')
 	{
-		save[size] = 0;
-		copy_until_end(save, *line);
+		new[i] = '\n';
+		i++;
 	}
-	free(save);
-	return (tmp_save);
+	new[i] = '\0';
+	return (new);
 }
 
-static char	*read_line(int fd, char **line, char *save)
+char	*ft_read_file(int fd, char *buff)
 {
+	char	*buff2;
 	int		ret;
-	char	*tmp;
-	char	*buff;
 
 	ret = BUFFER_SIZE;
-	buff = malloc(BUFFER_SIZE + 1);
-	if (!buff)
-		return (NULL);
-	tmp = ft_strchr(save, '\n');
-	while (tmp == NULL && ret == BUFFER_SIZE)
+	while (ret > 0)
 	{
-		ret = read(fd, buff, BUFFER_SIZE);
-		if (ret == -1)
-			return (free_strings(save, buff));
-		buff[ret] = 0;
-		tmp = ft_strjoin(save, buff);
-		free(save);
-		save = tmp;
-		tmp = ft_strchr(save, '\n');
+		buff2 = malloc((BUFFER_SIZE + 1) * sizeof(char));
+		if (!buff2)
+			return (NULL);
+		ret = read(fd, buff2, BUFFER_SIZE);
+		if ((ret == 0 && ft_strlen_g(buff) == 0) || ret == -1)
+			return (free(buff), free(buff2), NULL);
+		buff2[ret] = '\0';
+		buff = ft_strjfree(buff, buff2);
+		free(buff2);
+		if (ft_strchr_g(buff, '\n') == 1)
+			break ;
 	}
-	if (ret != BUFFER_SIZE && tmp == NULL)
-		tmp = save + ft_strlen(save) - 1;
-	free(buff);
-	return (extract_line_and_save(line, save, (tmp - save) + 1));
+	return (buff);
 }
 
 char	*get_next_line(int fd)
 {
-	char		*line;
-	static char	*save[OPEN_MAX] = {0};
+	char		*ltr;
+	char		*buff;
+	static char	res[BUFFER_SIZE + 1];
 
-	if (fd < 0 || BUFFER_SIZE < 1)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = NULL;
-	if (!save[fd])
-		save[fd] = ft_strdup("");
-	save[fd] = read_line(fd, &line, save[fd]);
-	return (line);
+	buff = NULL;
+	buff = ft_getres(res, buff);
+	if (!has_newline(buff))
+		buff = ft_read_file(fd, buff);
+	if (buff == NULL)
+		return (NULL);
+	ltr = ft_getline(buff);
+	if (ltr[0] == '\0')
+	{
+		free(ltr);
+		free(buff);
+		return (NULL);
+	}
+	ft_nextline(buff, res);
+	return (ltr);
 }

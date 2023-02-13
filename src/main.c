@@ -6,7 +6,7 @@
 /*   By: nibenoit <nibenoit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:20:30 by nibenoit          #+#    #+#             */
-/*   Updated: 2023/02/10 10:45:13 by nibenoit         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:36:15 by nibenoit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	main(int argc, char *argv[])
 
 	a = NULL;
 	b = NULL;
+	if (argc == 1)
+		return (0);
 	if (parse(&a, argc, argv) != 0)
 		error_msg("Error", a, b);
 	if (already_sort(a))
